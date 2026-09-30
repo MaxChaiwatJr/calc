@@ -250,10 +250,10 @@ $("bg").onclick=graph;
 const ptr=new Map();let mvd=0,pd=0;
 gc.onpointerdown=e=>{gc.setPointerCapture(e.pointerId);ptr.set(e.pointerId,[e.clientX,e.clientY]);mvd=0;pd=0};
 gc.onpointermove=e=>{if(!ptr.has(e.pointerId))return;const o=ptr.get(e.pointerId);
-if(ptr.size==1){const dx=e.clientX-o[0],dy=e.clientY-o[1];mvd+=Math.abs(dx)+Math.abs(dy);G.cx-=dx/G.s;G.cy+=dy/G.s}
+if(ptr.size==1){const dx=(e.clientX-o[0])/Z,dy=(e.clientY-o[1])/Z;mvd+=Math.abs(dx)+Math.abs(dy);G.cx-=dx/G.s;G.cy+=dy/G.s}
 ptr.set(e.pointerId,[e.clientX,e.clientY]);
 if(ptr.size==2){const[a,b]=[...ptr.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pd)G.s*=d/pd;pd=d;mvd+=9}draw()};
-gc.onpointerup=gc.onpointercancel=e=>{if(ptr.size==1&&mvd<6){const r=gc.getBoundingClientRect(),py=e.clientY-r.top,x=G.cx+(e.clientX-r.left-gc.clientWidth/2)/G.s;let best=null;
+gc.onpointerup=gc.onpointercancel=e=>{if(ptr.size==1&&mvd<6){const r=gc.getBoundingClientRect(),py=(e.clientY-r.top)/Z,x=G.cx+((e.clientX-r.left)/Z-gc.clientWidth/2)/G.s;let best=null;
 G.f.forEach((f,i)=>{const y=fX(f,"0",x);if(isFinite(y)){const d=Math.abs(gc.clientHeight/2-(y-G.cy)*G.s-py);if(!best||d<best[3])best=[x,y,i,d]}});G.tr=best;draw()}ptr.delete(e.pointerId);pd=0};
 const SV=()=>{try{localStorage.setItem("calc85",JSON.stringify({H:H.slice(-50),V,ang,fr,sci,gf:G.f}))}catch(e){}};
 try{const d=JSON.parse(localStorage.getItem("calc85")||"null");if(d){H.push(...d.H);hi=H.length;Object.assign(V,d.V);ang=d.ang;fr=d.fr;sci=d.sci;G.f=d.gf||[]}}catch(e){}
@@ -337,5 +337,11 @@ const tpl=s=>{s=s.replace(/(\d+)⌐‹([^‹›¦]*)¦([^‹›¦]*)›/g,"($1+(
 function fnav(dn){if(fresh)return false;let d=0,o=-1;for(let i=pos-1;i>=0;i--){if(expr[i]=="›")d++;else if(expr[i]=="‹"){if(!d){o=i;break}d--}}if(o<0)return false;
 let m=-1;d=0;for(let j=o+1;j<expr.length;j++){if(expr[j]=="‹")d++;else if(expr[j]=="›"){if(!d)break;d--}else if(expr[j]=="¦"&&!d)m=j}if(m<0)return false;
 if(dn&&pos<=m){pos=m+1;return true}if(!dn&&pos>m){pos=m;return true}return false}
+let Z=1;
+function fit(){const a=$("app");a.style.transform="none";document.body.style.height="";const h=a.offsetHeight,w=a.offsetWidth,vh=(window.visualViewport?visualViewport.height:innerHeight)-8;
+Z=Math.max(.55,Math.min(1,vh/h,innerWidth/w));a.style.transformOrigin="top center";if(Z<1){a.style.transform="scale("+Z+")";document.body.style.height=Math.ceil(h*Z+8)+"px"}}
+addEventListener("resize",fit);if(window.visualViewport)visualViewport.addEventListener("resize",fit);
+if(typeof ResizeObserver!="undefined")new ResizeObserver(fit).observe($("app"));
+fit();
 render();
 </script></body></html>
