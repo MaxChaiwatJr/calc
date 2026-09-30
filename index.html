@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Calc"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#1f2227"><link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAC+UlEQVR4nO3dPYoUURSAUUfch2DiMnorgpFgZuAaDCYTjAS3MjszGBADv/nperemKM9ZwKtLv89qC/rV3Lx99/4V/Mvrlx6A4xIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQXozsej3n98mluVhnz9+XbvgzdqfCcrixS1MZOXXijKOYOEuLItDGcexai/WxKGMo1myI55WSAvicNs4pu374s5BEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdpQRzL31PGEtv3xZ2DtCYON4+jWbIjy+4c+jiOVXux8mtFH0ewcBcWv6T2nreEvYijv8GYM/G0QhIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHaeQvUt/78OnLxLK/ftya4bkzXGfqzjH0iTxrZTNsNBLH9NxPWd8M262PY4eiH72KGZZYHMc+n8jD1zLDKp5WSOIgiYMkDpI4SOIgiYMkDpI4SOIgiYMkDpI4SOIgLY5jh9+uPXotM6yy/s6xz+fy8FXMsMTI18r05/KU9c2w3dT/OebmfvrKZtjI2wRJnlZI4iCJgyQOkjhI4iA5Zf9fzHAdp+zPP8PVnLI/+QxbOGV/5hk2csr+tDNs52mFJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SU/annWE7p+zPPMNGTtmffIYtnLI//wxXc8qe5GmFJA6SOEjiIImDJA6SU/bjM9zd3U3McLlcJpb9m1P2szMMlTG68h9O2Q/OML1/0+s7ZT81ww7/sqev4pT9yAz7lDF9LU8rJHGQxEESB0kcJHGQxEESB0kcJHGQxEESB0kcJHGQnLIfmWGH3/DtcC2n7Kdm2KeP0as4ZT84w3Qf0+s7ZT87w9z+7XBncsqe5GmFJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIImDJA6SOEjiIP0G5vEYUUtQPA4AAAAASUVORK5CYII="><title>Scientific Calculator fx-570</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#1f2227;--lcd:#b3bfb0;--ink:#1c2420;--k:#7f8b9a;--kd:#33373d;--kw:#e0e3e8}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#1f2227;color:#eee;font-family:system-ui,sans-serif;display:flex;justify-content:center}
+#app{width:100%;max-width:430px;padding:10px 8px 16px}
+#lcd{background:var(--lcd);color:var(--ink);border:5px solid #101215;border-radius:12px;height:170px;padding:8px 10px;font-family:ui-monospace,Menlo,monospace;position:relative;display:flex;flex-direction:column}
+#st{font-size:11px;display:flex;gap:8px;height:14px;opacity:.85}
+#st b{font-weight:700}
+#ex{font-size:24px;flex:1;overflow-y:auto;word-break:break-all;white-space:pre-wrap;line-height:1.25}
+#res{font-size:32px;text-align:right;min-height:40px;overflow-x:auto;white-space:nowrap}
+.cur{display:inline-block;width:2px;height:1em;background:#f57c00;vertical-align:-3px;animation:b 1s steps(1) infinite}
+@keyframes b{50%{opacity:0}}
+#hist{display:none;position:absolute;inset:0;background:var(--lcd);overflow-y:auto;padding:8px;font-size:15px;border-radius:8px}
+#hist div{padding:6px 2px;border-bottom:1px solid #8a9788;cursor:pointer}
+#hist div span{display:block;text-align:right;font-weight:700}
+.row{display:grid;gap:7px;margin-top:2px}
+.kw{position:relative;padding-top:15px}
+.lb{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;font-size:11px;padding:0 3px;font-family:ui-monospace,Menlo,monospace}
+.lb .s{color:#8fd19e}.lb .a{color:#ff9d8a}
+button{width:100%;height:42px;border:0;border-radius:14px;background:var(--kd);color:#eee;font-size:15px;font-weight:600;box-shadow:0 2px 0 #14161a;cursor:pointer}
+button:active{transform:translateY(2px)}
+.n{background:var(--k);font-size:22px}
+.o{background:var(--kw);color:#111;font-size:22px}
+.g{background:#a8d58f;color:#111}.b{background:#b9dcf5;color:#111}
+button.on{outline:3px solid #f5a623}
+.bar{display:flex;gap:6px;margin-bottom:8px;font-size:12px}
+.bar button{height:30px;font-size:12px;border-radius:9px}
+#pn select,#pn input,#pn textarea{background:#2b2f36;color:#eee;border:1px solid #4a505a;border-radius:8px;padding:8px;font-size:15px;width:100%;font-family:inherit}
+#pn .fs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}#pn .fs input{width:calc(33% - 4px)}#pn .fs label{width:calc(33% - 4px);font-size:12px;color:#aaa}
+#pn select{margin-top:4px}#pn textarea{margin:8px 0}#go{margin-top:4px;background:#3b82f6}
+#po{margin-top:12px;background:var(--lcd);color:var(--ink);border-radius:10px;padding:10px;font-family:ui-monospace,Menlo,monospace;font-size:16px;min-height:40px;line-height:1.6}
+.bar button.on{background:#3b82f6}
+#gc{display:none;position:absolute;inset:0;width:100%;height:100%;border-radius:8px;touch-action:none}
+#gbt{display:none;position:absolute;top:4px;right:4px;gap:4px}#gbt button{width:34px;height:28px;font-size:15px;border-radius:8px;padding:0}
+#cv{display:none;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px;font-size:14px}#cv input{width:90px;background:#2b2f36;color:#eee;border:1px solid #4a505a;border-radius:8px;padding:6px;font-size:15px}#cv button{width:auto;padding:0 14px;height:34px;background:#3b82f6}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.8em;line-height:1.1}.fr b{font-weight:400;padding:0 2px}.fr b:first-child{border-bottom:1.5px solid}.ov{border-top:1.5px solid;padding:0 1px}sup{font-size:.6em;line-height:0}
+#pn .bar{flex-wrap:wrap}#pn label{display:block;font-size:12px;color:#aaa;margin-top:6px}#pn textarea{font-family:ui-monospace,Menlo,monospace}
+#pn table{width:100%;border-collapse:collapse}#pn td,#pn th{padding:2px}#pn td input{padding:6px 2px;font-size:13px;text-align:center}#pn th{font-size:12px;color:#aaa}
+.fr{font-size:.95em}.bx{opacity:.4}
+</style></head><body><div id="app">
+<div id="lcd"><div id="st"></div><div id="ex"></div><div id="res"></div><div id="hist"></div><canvas id="gc"></canvas><div id="gbt"><button>＋</button><button>－</button><button>↻</button><button>✕</button><button>+f</button><button>🗑</button></div></div>
+<div id="cv"></div><div class="bar" style="margin-top:8px"><button id="bh">ประวัติ</button><button id="bm">DEG</button><button id="bf">MATH</button><button id="bp">EQN / STAT</button><button id="bg">กราฟ</button></div>
+<div id="kb"></div><div id="pn" style="display:none"></div></div>
+<script>
+const K=(m,a,s,sa,al,aa,c)=>({m,a,s,sa,al,aa,c});
+const N=d=>K(d,d,"","","","","n");
+const L=[
+[K("SHIFT","@shift",0,0,0,0,"g"),K("ALPHA","@alpha",0,0,0,0,"b"),K("◀","@left"),K("▶","@right"),K("MODE","@mode"),K("»","@hist")],
+[K("CALC","@calc","SOLVE","@solve","=","="),K("|■|","abs(","mod","mod(","Π","Π("),K("▲","@up","กราฟ","@graph"),K("▼","@down"),K("■⁻¹","^(-1)","■!","!","Σ","Σ("),K("Log■","logb(","∫dx","∫(","d/dx","d/dx(")],
+[K("a b/c","@frac","■ b/c","@mixed","a","A"),K("√■","√(","∛■","∛(","b","B"),K("■²","^2","■³","^3","c","C"),K("■ˣ","^(","","","d","D"),K("Log","log(","10■","10^(","e","E"),K("Ln","ln(","e■","e^(","f","F")],
+[K("(−)","-","i","i"),K(",",",","X","X","″","″"),K("hyp","@hyp","°","°","′","′"),K("Sin","sin(","Sin⁻¹","asin(","x","X"),K("Cos","cos(","Cos⁻¹","acos(","y","Y"),K("Tan","tan(","Tan⁻¹","atan(","m","M")],
+[K("RCL","@rcl","STO","@sto"),K("ENG","@eng","Re","Re(","Im","Im("),K("(","(","arg","arg("),K(")",")","conj","conj("),K("S⇔D","@sd","▶DMS","@dms"),K("M+","@mp","M−","@mm")],
+[N(7),K(8,8,"GCD","gcd(","","","n"),K(9,9,"LCM","lcm(","","","n"),K("⌫","@del"),K("CLR","@clr","CLR All","@clrall")],
+[N(4),N(5),N(6),K("×","×","nPr","Pr","","","o"),K("÷","÷","nCr","Cr","","","o")],
+[N(1),N(2),N(3),K("+","+","Ceil","ceil(","Pol","pol(","o"),K("−","−","Floor","floor(","Rec","rec(","o")],
+[K(0,0,"Ran#","rand()","","","n"),K(".",".","","","","","n"),K("Exp","×10^","π","π","e","e","n"),K("Ans","Ans","","","","","o"),K("=","@eq","","","","","o")]];
+let expr="",pos=0,fresh=false,shift=0,alpha=0,hyp=0,pend=null,ang="DEG",fr=1,sci=0,resT="",hi=0,ans=0,mem=[];
+const V={A:0,B:0,C:0,D:0,E:0,F:0,X:0,Y:0,M:0},H=[];
+const $=i=>document.getElementById(i);
+const kb=$("kb");
+L.forEach(r=>{const d=document.createElement("div");d.className="row";d.style.gridTemplateColumns=`repeat(${r.length},1fr)`;
+r.forEach(k=>{const w=document.createElement("div");w.className="kw";
+w.innerHTML=`<div class="lb"><span class="s">${k.s||""}</span><span class="a">${k.al||""}</span></div>`;
+const b=document.createElement("button");b.textContent=k.m;if(k.c)b.className=k.c;if(k.a=="@shift")b.id="bs";if(k.a=="@alpha")b.id="ba";
+b.onclick=()=>press(k);w.appendChild(b);d.appendChild(w)});kb.appendChild(d)});
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function render(){try{SV()}catch(e){}$("ex").innerHTML=tb(expr.slice(0,pos)+"\u0001"+expr.slice(pos));
+$("res").innerHTML=rh(resT);
+$("st").innerHTML=(shift?"<b>S</b>":"")+(alpha?"<b>A</b>":"")+(hyp?"<b>hyp</b>":"")+(V.M?"<b>M</b>":"")+"<b>"+ang+"</b>"+(pend?"<b>"+pend+"?</b>":"");
+$("bs").classList.toggle("on",!!shift);$("ba").classList.toggle("on",!!alpha);
+$("bm").textContent=ang;$("bf").textContent=fr?"MATH":"DEC";
+const e=$("ex");e.scrollTop=e.scrollHeight}
+function ins(t){if(fresh){expr=/^(Pr|Cr|[+−×÷^!])/.test(t)?"Ans":"";pos=expr.length;fresh=false}
+if(hyp&&/^a?(sin|cos|tan)\($/.test(t)){t=t.replace("(","h(");hyp=0}
+expr=expr.slice(0,pos)+t+expr.slice(pos);pos+=t.length}
+const fact=n=>{if(n<0||n>170||n%1)throw 0;let r=1;for(let i=2;i<=n;i++)r*=i;return r};
+const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
+function compute(s,raw){s=dmsP(expandC(tpl(s)));
+s=s.replace(/×/g,"*").replace(/÷/g,"/").replace(/−/g,"-").replace(/°/g,"");
+s=s.replace(/([\d.]+)!/g,"fact($1)");
+s=s.replace(/([\d.]+|Ans)Pr([\d.]+|Ans)/g,"nPr($1,$2)").replace(/([\d.]+|Ans)Cr([\d.]+|Ans)/g,"nCr($1,$2)");
+s=s.replace(/√\(/g,"sqrt(").replace(/∛\(/g,"cbrt(");
+s=s.replace(/(\d|\)|π|Ans|\b[A-FXYMe]\b)\s*(?=[A-Za-zπ(])/g,"$1*");
+s=s.replace(/(^|[(*\/+,-])-(\d+(?:\.\d+)?)\^/g,"$1-1*$2^").replace(/\^/g,"**");
+const k=ang=="DEG"?Math.PI/180:ang=="GRAD"?Math.PI/200:1,q=1/k;
+const F={sin:x=>Math.sin(x*k),cos:x=>Math.cos(x*k),tan:x=>Math.tan(x*k),asin:x=>Math.asin(x)*q,acos:x=>Math.acos(x)*q,atan:x=>Math.atan(x)*q,
+sinh:Math.sinh,cosh:Math.cosh,tanh:Math.tanh,asinh:Math.asinh,acosh:Math.acosh,atanh:Math.atanh,
+log:Math.log10,ln:Math.log,logb:(b,x)=>Math.log(x)/Math.log(b),sqrt:Math.sqrt,cbrt:Math.cbrt,abs:Math.abs,fact,
+nPr:(n,r)=>fact(n)/fact(n-r),nCr:(n,r)=>fact(n)/(fact(r)*fact(n-r)),gcd,lcm:(a,b)=>Math.abs(a*b)/gcd(a,b),mod:(a,b)=>a-b*Math.floor(a/b),
+ceil:Math.ceil,floor:Math.floor,rand:()=>Math.round(Math.random()*1000)/1000,"π":Math.PI,e:Math.E,Ans:ans,...V};
+const n=Object.keys(F),r=new Function(...n,"return "+s)(...n.map(x=>F[x]));
+if(typeof r!="number"||!isFinite(r))throw 0;
+if(raw)return r;let v=parseFloat(r.toPrecision(12));return Math.abs(v)<1e-12?0:v}
+function frac(x){if(Number.isInteger(x))return null;const a=Math.abs(x);let h1=1,h0=0,k1=0,k0=1,b=a;
+for(let i=0;i<20;i++){const n=Math.floor(b),hn=n*h1+h0,kn=n*k1+k0;h0=h1;h1=hn;k0=k1;k1=kn;if(Math.abs(a-h1/k1)<1e-9)break;b=1/(b-n);if(!isFinite(b))break}
+return Math.abs(a-h1/k1)<1e-9&&k1<=10000?(x<0?"-":"")+h1+"/"+k1:null}
+function fmt(r){if(fr){const f=frac(r);if(f)return f}
+if(sci||(r!=0&&(Math.abs(r)>=1e10||Math.abs(r)<1e-9))){const [m,e]=r.toExponential(9).split("e");return parseFloat(m)+"×10^"+parseInt(e)}
+return String(parseFloat(r.toPrecision(12)))}
+function ev(){try{let r,t;const pr=expr.match(/^(pol|rec)\((.+),(.+)\)$/);if(pr){polrec(pr);return}if(isC(expr)){const z=cx(expr);r=ans=z[0];ansI=z[1];t=fc(z)}else{r=ans=compute(expr);ansI=0;t=fmt(r)}H.push({e:expr,r,s:t});hi=H.length;resT=t;fresh=true;pos=expr.length}catch(x){resT="Math ERROR";fresh=false}}
+function press(k){
+if(pend){const v=k.aa;const p=pend;pend=null;if(/^[A-FXYM]$/.test(v)){if(p=="STO")V[v]=ans;else ins(v)}shift=alpha=0;return render()}
+let a=k.a;if(shift&&k.sa){a=k.sa}else if(alpha&&k.aa){a=k.aa}
+const tog=k.a=="@shift"||k.a=="@alpha";
+if(!tog){shift=0;alpha=0}
+if(a[0]=="@")act(a);else ins(String(a));render()}
+function act(a){
+switch(a){
+case"@shift":shift=shift?0:1;alpha=0;break;
+case"@alpha":alpha=alpha?0:1;shift=0;break;
+case"@left":fresh=false;pos=Math.max(0,pos-1);break;
+case"@right":fresh=false;pos=Math.min(expr.length,pos+1);break;
+case"@mode":ang=ang=="DEG"?"RAD":ang=="RAD"?"GRAD":"DEG";break;
+case"@hist":showHist();break;
+case"@up":if(fnav(0))break;if(H.length){hi=Math.max(0,hi-1);expr=H[hi].e;pos=expr.length;fresh=false;resT=""}break;
+case"@down":if(fnav(1))break;if(hi<H.length-1){hi++;expr=H[hi].e;pos=expr.length;fresh=false;resT=""}break;
+case"@hyp":hyp=hyp?0:1;break;
+case"@graph":graph();break;
+case"@frac":ins("‹¦›");pos-=2;break;
+case"@mixed":ins("⌐‹¦›");pos-=2;break;
+case"@dms":{const x=ans,t=Math.round(Math.abs(x)*3600*1e6)/1e6;resT=(x<0?"-":"")+Math.floor(t/3600)+"°"+Math.floor(t%3600/60)+"′"+fn(t%60)+"″";break}
+case"@solve":{const o=solveAll(expr).sort((a,b)=>Math.abs(a)-Math.abs(b));if(o.length){V.X=o[0];resT="X = "+o.slice(0,6).map(fn).join(" , ")}else resT="ไม่พบคำตอบ";fresh=false;break}
+case"@eq":ev();break;
+case"@calc":calcVars();break;
+case"@del":if(fresh){fresh=false;pos=expr.length}if(pos>0&&"‹¦›".includes(expr[pos-1])){if(expr[pos-1]=="›")pos--;else{const i=expr.lastIndexOf("‹¦›",pos);if(i>=0&&i<pos&&pos-i<=2){expr=expr.slice(0,i)+expr.slice(i+3);pos=i}else pos--}break}if(pos>0){const m=expr.slice(0,pos).match(/(Ans|Pr|Cr|[∫ΣΠ]\(|d\/dx\(|[a-z]+\(|.)$/);const n=m?m[0].length:1;expr=expr.slice(0,pos-n)+expr.slice(pos);pos-=n}break;
+case"@clr":expr="";pos=0;resT="";fresh=false;pend=null;break;
+case"@clrall":expr="";pos=0;resT="";fresh=false;H.length=0;hi=0;ans=0;for(const v in V)V[v]=0;break;
+case"@rcl":pend="RCL";break;
+case"@sto":pend="STO";break;
+case"@eng":sci=sci?0:1;if(fresh)resT=fmt(ans);break;
+case"@sd":fr=fr?0:1;if(fresh)resT=fmt(ans);break;
+case"@mp":case"@mm":try{const r=fresh?ans:compute(expr);V.M+=a=="@mp"?r:-r;V.M=parseFloat(V.M.toPrecision(12))}catch(x){resT="Math ERROR"}break;
+}}
+function showHist(){const h=$("hist");if(h.style.display=="block"){h.style.display="none";return}
+h.innerHTML=H.length?"":"<div>ยังไม่มีประวัติ</div>";
+H.slice().reverse().forEach(x=>{const d=document.createElement("div");d.innerHTML=tb(x.e)+"<span>= "+(x.s||fmt(x.r))+"</span>";
+d.onclick=()=>{expr=x.e;pos=expr.length;fresh=false;resT="";h.style.display="none";render()};h.appendChild(d)});
+h.style.display="block"}
+$("bh").onclick=()=>{showHist()};
+$("bm").onclick=()=>{act("@mode");render()};
+$("bf").onclick=()=>{act("@sd");render()};
+addEventListener("keydown",e=>{if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;const m={"*":"×","/":"÷","-":"−"};let t=null;
+if(/^[0-9.+()^!,]$/.test(e.key))t=e.key;else if(m[e.key])t=m[e.key];
+if(t!==null){fresh&&/^[0-9.(]$/.test(t)&&(fresh=false,expr="",pos=0);ins(t);render();e.preventDefault();return}
+const s={Enter:"@eq","=":"@eq",Backspace:"@del",Escape:"@clr",ArrowLeft:"@left",ArrowRight:"@right",ArrowUp:"@up",ArrowDown:"@down"}[e.key];
+if(s){act(s);render();e.preventDefault()}});
+const P=$("pn");let tab="EQN",eq={t:"p2"};
+const cm=(a,b)=>[a[0]*b[0]-a[1]*b[1],a[0]*b[1]+a[1]*b[0]],cd=(a,b)=>{const d=b[0]*b[0]+b[1]*b[1];return[(a[0]*b[0]+a[1]*b[1])/d,(a[1]*b[0]-a[0]*b[1])/d]};
+function polyRoots(c){const n=c.length-1,a=c.map(x=>x/c[0]),R=1+Math.max(...a.slice(1).map(Math.abs)),z=[];let w=[R/2,0];
+for(let i=0;i<n;i++){z.push(w);w=cm(w,[.4,.9])}
+for(let it=0;it<800;it++)for(let i=0;i<n;i++){let p=[1,0];for(let k=1;k<=n;k++){p=cm(p,z[i]);p[0]+=a[k]}
+let q=[1,0];for(let j=0;j<n;j++)if(j!=i)q=cm(q,[z[i][0]-z[j][0],z[i][1]-z[j][1]]);const d=cd(p,q);z[i]=[z[i][0]-d[0],z[i][1]-d[1]]}
+if(z.some(r=>!isFinite(r[0]+r[1])))throw 0;return z.sort((u,v)=>u[0]-v[0]||u[1]-v[1])}
+const fn=x=>String(parseFloat((Math.abs(x)<1e-9?0:x).toPrecision(8)));
+function fc(z){const r=Math.abs(z[0])<1e-6?0:z[0],i=Math.abs(z[1])<1e-6?0:z[1];if(!i)return fn(r);
+return (r?fn(r)+(i<0?" − ":" + "):(i<0?"−":""))+fn(Math.abs(i))+"i"}
+function lin(M){const n=M.length;for(let i=0;i<n;i++){let m=i;for(let r=i+1;r<n;r++)if(Math.abs(M[r][i])>Math.abs(M[m][i]))m=r;
+if(Math.abs(M[m][i])<1e-12)throw"sing";[M[i],M[m]]=[M[m],M[i]];
+for(let r=0;r<n;r++)if(r!=i){const f=M[r][i]/M[i][i];for(let c=i;c<=n;c++)M[r][c]-=f*M[i][c]}}
+return M.map((r,i)=>r[n]/r[i])}
+function eqnUI(){const t=eq.t;let f="";
+if(t[0]=="p"){const d=+t[1];f=Array.from({length:d+1},(_,i)=>`<label>${"abcde"[i]} (x^${d-i})<input class="ci"></label>`).join("")}
+else{const n=+t[1];for(let r=0;r<n;r++)f+=Array.from({length:n+1},(_,c)=>`<input class="ci" placeholder="${c<n?"xyz"[c]:"= ค่าคงที่"}">`).join("")}
+const o=[["p2","พหุนามดีกรี 2"],["p3","พหุนามดีกรี 3"],["p4","พหุนามดีกรี 4"],["s2","ระบบสมการ 2 ตัวแปร"],["s3","ระบบสมการ 3 ตัวแปร"]];
+return `<select id="et">${o.map(([v,l])=>`<option value="${v}"${v==t?" selected":""}>${l}</option>`).join("")}</select><div class="fs">${f}</div><button id="go">แก้สมการ</button>`}
+const statUI=()=>`<textarea id="sd" rows="6" placeholder="ข้อมูล 1 ค่าต่อบรรทัด เช่น&#10;5&#10;7&#10;9.5&#10;หรือ 2 คอลัมน์ (x y) เพื่อหา regression"></textarea><button id="go">คำนวณ</button>`;
+function panel(){P.innerHTML=`<div class="bar"><button data-t="EQN" class="${tab=="EQN"?"on":""}">EQN สมการ</button><button data-t="STAT" class="${tab=="STAT"?"on":""}">STAT สถิติ</button></div>`+(tab=="EQN"?eqnUI():statUI())+`<div id="po"></div>`}
+function go0(){let L=[];try{
+if(tab=="EQN"){const v=[...document.querySelectorAll(".ci")].map(i=>compute(i.value.trim()||"0")),t=eq.t,n=+t[1];
+if(t[0]=="p"){if(!v[0])throw"a ต้องไม่เป็น 0";polyRoots(v).forEach((z,i)=>L.push(`x${i+1} = ${fc(z)}`));
+if(n==2){const D=v[1]*v[1]-4*v[0]*v[2],h=-v[1]/(2*v[0]);L.push(`Δ = ${fn(D)}`,`จุดยอด = (${fn(h)}, ${fn(v[0]*h*h+v[1]*h+v[2])})`)}}
+else{const M=[];for(let r=0;r<n;r++)M.push(v.slice(r*(n+1),(r+1)*(n+1)));lin(M).forEach((x,i)=>L.push(`${"xyz"[i]} = ${fn(x)}`))}}
+else{const rows=$("sd").value.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>l.split(/[\s,;]+/).map(x=>compute(x)));
+if(!rows.length)throw"ไม่มีข้อมูล";const x=rows.map(r=>r[0]),n=x.length,S=a=>a.reduce((p,q)=>p+q,0),sx=S(x),sxx=S(x.map(a=>a*a)),m=sx/n,
+so=x.slice().sort((a,b)=>a-b),md=a=>{const k=a.length>>1;return a.length%2?a[k]:(a[k-1]+a[k])/2};
+L.push(`n = ${n}`,`Σx = ${fn(sx)}`,`Σx² = ${fn(sxx)}`,`x̄ = ${fn(m)}`,`σx = ${fn(Math.sqrt(sxx/n-m*m))}`);
+if(n>1)L.push(`sx = ${fn(Math.sqrt((sxx-n*m*m)/(n-1)))}`);
+L.push(`min = ${fn(so[0])}   max = ${fn(so[n-1])}`,`Q1 = ${fn(n>1?md(so.slice(0,n>>1)):so[0])}   Med = ${fn(md(so))}   Q3 = ${fn(n>1?md(so.slice((n+1)>>1)):so[0])}`);
+if(rows.every(r=>r.length>1)&&n>1){const y=rows.map(r=>r[1]),sy=S(y),syy=S(y.map(a=>a*a)),sxy=S(x.map((a,i)=>a*y[i])),d=n*sxx-sx*sx,b=(n*sxy-sx*sy)/d;
+L.push("— ถดถอยเชิงเส้น y = a + bx —",`ȳ = ${fn(sy/n)}   Σy = ${fn(sy)}`,`Σxy = ${fn(sxy)}`,`a = ${fn((sy-b*sx)/n)}`,`b = ${fn(b)}`,`r = ${fn((n*sxy-sx*sy)/Math.sqrt(d*(n*syy-sy*sy)))}`)}}
+}catch(e){L=[typeof e=="string"&&e!="sing"?e:e=="sing"?"ไม่มีคำตอบเดียว (สมการไม่อิสระ)":"ข้อมูลไม่ถูกต้อง"]}
+$("po").innerHTML=L.map(l=>"<div>"+esc(l)+"</div>").join("")}
+P.onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;panel()}else if(b.id=="go")go()};
+P.onchange=e=>{if(e.target.id=="et"){eq.t=e.target.value;panel()}};
+$("bp").onclick=()=>{const o=P.style.display=="none";P.style.display=o?"block":"none";kb.style.display=o?"none":"block";$("bp").textContent=o?"← เครื่องคิดเลข":"EQN / STAT";if(o)panel()};
+let ansI=0;const isC=s=>/(^|[^a-zA-Z])i([^a-zA-Z]|$)|arg\(|conj\(|Re\(|Im\(/.test(s);
+const zln=a=>[Math.log(Math.hypot(a[0],a[1])),Math.atan2(a[1],a[0])],zexp=a=>{const m=Math.exp(a[0]);return[m*Math.cos(a[1]),m*Math.sin(a[1])]};
+function zpow(a,b){if(!a[0]&&!a[1])return[0,0];if(!b[1]&&Number.isInteger(b[0])&&Math.abs(b[0])<=64){let r=[1,0];for(let i=0;i<Math.abs(b[0]);i++)r=cm(r,a);return b[0]<0?cd([1,0],r):r}return zexp(cm(b,zln(a)))}
+function cx(s){s=tpl(s);s=s.replace(/×/g,"*").replace(/÷/g,"/").replace(/−/g,"-").replace(/√\(/g,"sqrt(").replace(/∛\(/g,"cbrt(");
+const T=s.match(/\d+\.?\d*|\.\d+|[A-Za-zπ]+|[-+*\/^(),]/g)||[],q=ang=="DEG"?180/Math.PI:ang=="GRAD"?200/Math.PI:1;let p=0;
+const ZF={sqrt:a=>{const m=Math.hypot(a[0],a[1]),r=Math.sqrt((m+a[0])/2),i=Math.sqrt((m-a[0])/2);return[r,a[1]<0?-i:i]},abs:a=>[Math.hypot(a[0],a[1]),0],arg:a=>[Math.atan2(a[1],a[0])*q,0],
+conj:a=>[a[0],-a[1]],Re:a=>[a[0],0],Im:a=>[a[1],0],exp:zexp,ln:zln,log:a=>{const l=zln(a);return[l[0]/Math.LN10,l[1]/Math.LN10]},cbrt:a=>zpow(a,[1/3,0])};
+const E=()=>{let a=Tm();while(T[p]=="+"||T[p]=="-"){const o=T[p++],b=Tm();a=o=="+"?[a[0]+b[0],a[1]+b[1]]:[a[0]-b[0],a[1]-b[1]]}return a};
+const Tm=()=>{let a=U();for(;;){const t=T[p];if(t=="*"||t=="/"){p++;const b=U();a=t=="*"?cm(a,b):cd(a,b)}else if(t&&(/^[\d.A-Za-zπ]/.test(t)||t=="("))a=cm(a,U());else return a}};
+const U=()=>{if(T[p]=="-"){p++;const a=U();return[-a[0],-a[1]]}if(T[p]=="+"){p++;return U()}const a=A();if(T[p]=="^"){p++;return zpow(a,U())}return a};
+const A=()=>{const t=T[p++];if(t==undefined)throw 0;if(/^[\d.]/.test(t))return[+t,0];
+if(t=="("){const a=E();if(T[p]==")")p++;return a}
+if(T[p]=="("){p++;const a=E();if(T[p]==")")p++;if(!ZF[t])throw 0;return ZF[t](a)}
+if(t=="i")return[0,1];if(t=="π")return[Math.PI,0];if(t=="e")return[Math.E,0];if(t=="Ans")return[ans,ansI];if(t in V)return[V[t],0];throw 0};
+const r=E();if(p<T.length)throw 0;const c=x=>Math.abs(x)<1e-12?0:parseFloat(x.toPrecision(12));return[c(r[0]),c(r[1])]}
+function fX(l,r,x){V.X=x;try{const v=compute(l)-compute(r);return isFinite(v)?v:NaN}catch(e){return NaN}}
+function solveAll(s){const m=s.split("="),l=m[0],r=m[1]||"0",X0=V.X,o=[];let px=null,pf=null;
+for(let i=0;i<=600;i++){const t=i/300-1,x=1000*t*t*t,f=fX(l,r,x);
+if(f===0)o.push(x);else if(px!==null&&isFinite(f)&&isFinite(pf)&&pf*f<0){let a=px,b=x,fa=pf;for(let k=0;k<70;k++){const c=(a+b)/2,fm=fX(l,r,c);if(fa*fm<=0)b=c;else{a=c;fa=fm}}
+const c=(a+b)/2;if(Math.abs(fX(l,r,c))<1e-6*Math.max(1,Math.min(Math.abs(pf),Math.abs(f))))o.push(c)}
+px=x;pf=f}
+V.X=X0;if(o.length>40)return[];const u=[];o.sort((a,b)=>a-b).forEach(x=>{x=parseFloat(x.toPrecision(10));if(!u.length||Math.abs(u[u.length-1]-x)>1e-7*(1+Math.abs(x)))u.push(x)});return u}
+const gc=$("gc"),g2=gc.getContext("2d"),G={on:0,cx:0,cy:0,s:30};
+function gE(){const m=expr.split("=");if(m.length>1)return/^\s*[yY]\s*$/.test(m[0])?m[1]:m[0]+"-("+m[1]+")";return expr||"X"}
+function draw(){const w=gc.width=gc.clientWidth,h=gc.height=gc.clientHeight,sc=G.s,X=x=>w/2+(x-G.cx)*sc,Y=y=>h/2-(y-G.cy)*sc,ex=gE(),X0=V.X;
+g2.fillStyle="#b3bfb0";g2.fillRect(0,0,w,h);let st=1;const nb=[1,2,5];for(let k=-6;k<8&&st*sc<45;k++)for(const b of nb)if(b*10**k*sc>=45){st=b*10**k;k=99;break}
+g2.font="10px monospace";g2.lineWidth=1;
+for(let x=Math.ceil((G.cx-w/2/sc)/st)*st;x<G.cx+w/2/sc;x+=st){g2.strokeStyle="#8a9788";g2.beginPath();g2.moveTo(X(x),0);g2.lineTo(X(x),h);g2.stroke();g2.fillStyle="#1c2420";g2.fillText(parseFloat(x.toPrecision(6)),X(x)+2,Math.min(h-3,Math.max(10,Y(0)+10)))}
+for(let y=Math.ceil((G.cy-h/2/sc)/st)*st;y<G.cy+h/2/sc;y+=st){g2.strokeStyle="#8a9788";g2.beginPath();g2.moveTo(0,Y(y));g2.lineTo(w,Y(y));g2.stroke();g2.fillStyle="#1c2420";g2.fillText(parseFloat(y.toPrecision(6)),Math.min(w-30,Math.max(2,X(0)+3)),Y(y)-2)}
+g2.strokeStyle="#1c2420";g2.lineWidth=2;g2.beginPath();g2.moveTo(X(0),0);g2.lineTo(X(0),h);g2.moveTo(0,Y(0));g2.lineTo(w,Y(0));g2.stroke();
+G.f.forEach((f,i)=>{g2.strokeStyle=COL[i%5];g2.lineWidth=2;g2.beginPath();let mv=1;
+for(let px=0;px<=w;px++){const y=fX(f,"0",G.cx+(px-w/2)/sc);if(!isFinite(y)||Math.abs(y-G.cy)*sc>h*4){mv=1;continue}const py=Y(y);mv?g2.moveTo(px,py):g2.lineTo(px,py);mv=0}g2.stroke();
+g2.fillStyle=COL[i%5];g2.fillText("y"+(i+1)+" = "+f,6,12+i*12)});
+G.pts.forEach(p=>{g2.fillStyle=p[2]<0?"#000":COL[p[2]%5];g2.beginPath();g2.arc(X(p[0]),Y(p[1]),4,0,7);g2.fill()});
+if(G.tr){g2.strokeStyle="#000";g2.lineWidth=1;g2.beginPath();g2.arc(X(G.tr[0]),Y(G.tr[1]),6,0,7);g2.stroke();g2.fillStyle="#1c2420";g2.fillText("("+fn(G.tr[0])+", "+fn(G.tr[1])+")",6,h-6)}
+V.X=X0}
+function graph(){G.on=!G.on;gc.style.display=G.on?"block":"none";$("gbt").style.display=G.on?"flex":"none";$("lcd").style.height=G.on?"320px":"";if(G.on)draw()}
+$("bg").onclick=graph;
+[...$("gbt").children].forEach((b,i)=>b.onclick=()=>{if(i==0)G.s*=1.5;if(i==1)G.s/=1.5;if(i==2){G.cx=G.cy=0;G.s=30}if(i==3)return graph();draw()});
+let dg=null;gc.onpointerdown=e=>{dg=[e.clientX,e.clientY];gc.setPointerCapture(e.pointerId)};gc.onpointerup=()=>dg=null;
+gc.onpointermove=e=>{if(!dg)return;G.cx-=(e.clientX-dg[0])/G.s;G.cy+=(e.clientY-dg[1])/G.s;dg=[e.clientX,e.clientY];draw()};
+gc.onwheel=e=>{e.preventDefault();G.s*=e.deltaY<0?1.15:1/1.15;draw()};
+const N5=[0,.5384693101056831,-.5384693101056831,.906179845938664,-.906179845938664],W5=[.5688888888888889,.4786286704993665,.4786286704993665,.2369268850561891,.2369268850561891];
+function n2s(v){if(!isFinite(v))throw 0;const t=String(v);if(!/e/.test(t))return"("+t+")";const [m,e]=t.split("e");return"("+m+"*10**"+parseInt(e)+")"}
+function integral(f,a,b){if(a==b)return 0;const F=x=>{V.X=x;return compute(f,true)};
+const gl=n=>{const h=(b-a)/n;let t=0;for(let k=0;k<n;k++){const c=a+(k+.5)*h;for(let j=0;j<5;j++)t+=W5[j]*F(c+N5[j]*h/2)}return t*h/2};
+const r=gl(16);let r2=gl(32);if(Math.abs(r-r2)>1e-9*(1+Math.abs(r2)))r2=gl(128);return r2}
+function deriv(f,x){const F=t=>{V.X=t;return compute(f,true)},h=1e-3*Math.max(1,Math.abs(x));return(-F(x+2*h)+8*F(x+h)-8*F(x-h)+F(x-2*h))/(12*h)}
+function expandC(s){let m;while((m=/(∫|d\/dx|Σ|Π)\(/.exec(s))){const st=m.index+m[0].length,a=[];let d=1,i=st,last=st;
+for(;i<s.length;i++){const c=s[i];if(c=="(")d++;else if(c==")"){if(!--d)break}else if(c==","&&d==1){a.push(s.slice(last,i));last=i+1}}
+a.push(s.slice(last,i));const X0=V.X;let v;
+try{if(m[1]=="∫"){if(a.length<3)throw 0;v=integral(a[0],compute(a[1]),compute(a[2]))}else if(m[1]=="Σ"||m[1]=="Π"){const lo=Math.round(compute(a[1])),hi2=Math.round(compute(a[2]));if(hi2-lo>100000||a.length<3)throw 0;let t=m[1]=="Σ"?0:1;for(let k=lo;k<=hi2;k++){V.X=k;const y=compute(a[0],true);t=m[1]=="Σ"?t+y:t*y}v=t}else{v=deriv(a[0],a.length>1?compute(a[1]):V.X)}}finally{V.X=X0}
+s=s.slice(0,m.index)+n2s(v)+s.slice(i+1)}return s}
+const COL=["#c2410c","#1d4ed8","#15803d","#a21caf","#b45309"];G.f=[];G.pts=[];G.tr=null;
+function gAdd(){const e=gE();if(e&&!G.f.includes(e)&&G.f.length<5)G.f.push(e)}
+function gPts(){const X0=V.X;G.pts=[];G.f.forEach((f,i)=>{try{solveAll(f+"=0").forEach(x=>G.pts.push([x,0,i]));for(let j=i+1;j<G.f.length;j++)solveAll(f+"="+G.f[j]).forEach(x=>{V.X=x;G.pts.push([x,compute(f),-1])})}catch(e){}});V.X=X0}
+function graph(){G.on=!G.on;gc.style.display=G.on?"block":"none";$("gbt").style.display=G.on?"flex":"none";$("lcd").style.height=G.on?"320px":"";if(G.on){if(expr.trim())gAdd();gPts();draw()}}
+$("bg").onclick=graph;
+[...$("gbt").children].forEach((b,i)=>b.onclick=()=>{if(i==0)G.s*=1.5;else if(i==1)G.s/=1.5;else if(i==2){G.cx=G.cy=0;G.s=30;G.tr=null;gPts()}else if(i==3)return graph();else if(i==4){gAdd();gPts()}else{G.f=[];G.pts=[];G.tr=null}draw()});
+const ptr=new Map();let mvd=0,pd=0;
+gc.onpointerdown=e=>{gc.setPointerCapture(e.pointerId);ptr.set(e.pointerId,[e.clientX,e.clientY]);mvd=0;pd=0};
+gc.onpointermove=e=>{if(!ptr.has(e.pointerId))return;const o=ptr.get(e.pointerId);
+if(ptr.size==1){const dx=e.clientX-o[0],dy=e.clientY-o[1];mvd+=Math.abs(dx)+Math.abs(dy);G.cx-=dx/G.s;G.cy+=dy/G.s}
+ptr.set(e.pointerId,[e.clientX,e.clientY]);
+if(ptr.size==2){const[a,b]=[...ptr.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pd)G.s*=d/pd;pd=d;mvd+=9}draw()};
+gc.onpointerup=gc.onpointercancel=e=>{if(ptr.size==1&&mvd<6){const r=gc.getBoundingClientRect(),py=e.clientY-r.top,x=G.cx+(e.clientX-r.left-gc.clientWidth/2)/G.s;let best=null;
+G.f.forEach((f,i)=>{const y=fX(f,"0",x);if(isFinite(y)){const d=Math.abs(gc.clientHeight/2-(y-G.cy)*G.s-py);if(!best||d<best[3])best=[x,y,i,d]}});G.tr=best;draw()}ptr.delete(e.pointerId);pd=0};
+const SV=()=>{try{localStorage.setItem("calc85",JSON.stringify({H:H.slice(-50),V,ang,fr,sci,gf:G.f}))}catch(e){}};
+try{const d=JSON.parse(localStorage.getItem("calc85")||"null");if(d){H.push(...d.H);hi=H.length;Object.assign(V,d.V);ang=d.ang;fr=d.fr;sci=d.sci;G.f=d.gf||[]}}catch(e){}
+$("res").onclick=()=>{try{navigator.clipboard.writeText(resT.replace(/^X = /,""));$("res").style.opacity=.4;setTimeout(()=>$("res").style.opacity=1,300)}catch(e){}};
+function calcVars(){const vs=[...new Set(expr.match(/\b[XYMA-F]\b/g)||[])];if(!vs.length)return ev();const d=$("cv");
+d.innerHTML=vs.map(v=>`<label>${v} = <input data-v="${v}" value="${V[v]}"></label>`).join("")+'<button id="cvg">คำนวณ</button>';d.style.display="flex";
+$("cvg").onclick=()=>{try{d.querySelectorAll("input").forEach(i=>V[i.dataset.v]=compute(i.value||"0"));d.style.display="none";ev()}catch(e){resT="Math ERROR"}render()}}
+const dmsP=s=>s.replace(/(\d+)⌐(\d+)÷(\d+)/g,"($1+$2/$3)").replace(/(\d+(?:\.\d+)?)°(?:(\d+(?:\.\d+)?)′)?(?:(\d+(?:\.\d+)?)″)?/g,(_,d,m,c)=>"("+d+"+"+(m||0)+"/60+"+(c||0)+"/3600)");
+function polrec(pr){const a=compute(pr[2]),b=compute(pr[3]),q=ang=="DEG"?Math.PI/180:ang=="GRAD"?Math.PI/200:1,P=pr[1]=="pol";
+if(P){V.X=Math.hypot(a,b);V.Y=Math.atan2(b,a)/q}else{V.X=a*Math.cos(b*q);V.Y=a*Math.sin(b*q)}
+const t=(P?"r=":"x=")+fn(V.X)+"  "+(P?"θ=":"y=")+fn(V.Y);ans=V.X;ansI=0;H.push({e:expr,r:ans,s:t});hi=H.length;resT=t;fresh=true;pos=expr.length}
+function tb(s){function f(t){let o="",i=0;while(i<t.length){const c=t[i];
+if(c=="‹"){let d=1,k=i+1,m=-1;while(k<t.length){if(t[k]=="‹")d++;else if(t[k]=="›"){if(!--d)break}else if(t[k]=="¦"&&d==1)m=k;k++}
+const n=t.slice(i+1,m<0?k:m),de=m<0?"":t.slice(m+1,k),bx=x=>x.replace(/\u0001/g,"")?f(x):f(x)+'<span class="bx">▢</span>';
+o+='<span class="fr"><b>'+bx(n)+'</b><b>'+bx(de)+'</b></span>';i=k+1;continue}
+if(c=="⌐"){i++;continue}
+if(c=="^"){let j=i+1,n;if(t[j]=="("){let d=1,k=j+1;while(k<t.length&&d){if(t[k]=="(")d++;if(t[k]==")")d--;k++}n=t.slice(j+1,d?k:k-1);i=k}else{const m=t.slice(j).match(/^-?(?:[\d.]+|Ans|[A-Za-zπ])/);n=m?m[0]:"";i=j+n.length}o+="<sup>"+f(n)+"</sup>";continue}
+if(c=="√"&&t[i+1]=="("){let d=1,k=i+2;while(k<t.length&&d){if(t[k]=="(")d++;if(t[k]==")")d--;k++}o+='<span class="rt">√<span class="ov">'+f(t.slice(i+2,d?k:k-1))+"</span></span>";i=k;continue}
+o+=c=="<"?"&lt;":c=="&"?"&amp;":c=="\u0001"?'<i class="cur"></i>':c;i++}return o}
+return f(s)}
+/* ---- tools ---- */
+const S={dt:"ปกติ",cc:"ความยาว"},GO='<button id="go">คำนวณ</button>';
+const mat=t=>t.trim().split("\n").map(r=>r.trim().split(/[\s,;]+/).map(x=>compute(x))),vec=t=>t.trim().split(/[\s,;]+/).map(x=>compute(x));
+const mfmt=m=>m.map(r=>r.map(fn).join("   ")),madd=(a,b,k)=>{if(a.length!=b.length||a[0].length!=b[0].length)throw"ขนาดเมทริกซ์ไม่เท่ากัน";return a.map((r,i)=>r.map((x,j)=>x+k*b[i][j]))};
+const mmul=(a,b)=>{if(a[0].length!=b.length)throw"ขนาดเมทริกซ์ไม่เข้ากัน";return a.map(r=>b[0].map((_,j)=>r.reduce((s,x,k)=>s+x*b[k][j],0)))},mT=a=>a[0].map((_,j)=>a.map(r=>r[j]));
+function mdet(m){const n=m.length;m=m.map(r=>r.slice());let d=1;for(let i=0;i<n;i++){let p=i;for(let r=i+1;r<n;r++)if(Math.abs(m[r][i])>Math.abs(m[p][i]))p=r;if(!m[p][i])return 0;if(p!=i){[m[i],m[p]]=[m[p],m[i]];d=-d}d*=m[i][i];for(let r=i+1;r<n;r++){const f=m[r][i]/m[i][i];for(let c=i;c<n;c++)m[r][c]-=f*m[i][c]}}return d}
+function minv(m){const n=m.length,a=m.map((r,i)=>[...r,...r.map((_,j)=>+(i==j))]);for(let i=0;i<n;i++){let p=i;for(let r=i+1;r<n;r++)if(Math.abs(a[r][i])>Math.abs(a[p][i]))p=r;if(Math.abs(a[p][i])<1e-12)throw"det = 0 ไม่มีอินเวอร์ส";[a[i],a[p]]=[a[p],a[i]];const d=a[i][i];a[i]=a[i].map(x=>x/d);for(let r=0;r<n;r++)if(r!=i){const f=a[r][i];a[r]=a[r].map((x,c)=>x-f*a[i][c])}}return a.map(r=>r.slice(n))}
+function erfc(x){if(x<0)return 2-erfc(-x);if(x<2.5){let s=x,t=x;for(let n=1;n<200;n++){t*=-x*x/n;const u=t/(2*n+1);s+=u;if(Math.abs(u)<1e-17)break}return 1-2/Math.sqrt(Math.PI)*s}let t=x;for(let k=60;k>=1;k--)t=x+k/2/t;return Math.exp(-x*x)/Math.sqrt(Math.PI)/t}
+const Phi=z=>.5*erfc(-z/Math.SQRT2),lf=n=>{let s=0;for(let i=2;i<=n;i++)s+=Math.log(i);return s};
+const bp=(n,p,k)=>p<=0?+(k==0):p>=1?+(k==n):Math.exp(lf(n)-lf(k)-lf(n-k)+k*Math.log(p)+(n-k)*Math.log(1-p)),pp=(l,k)=>Math.exp(-l+k*Math.log(l)-lf(k));
+const opt=(a,c)=>a.map(x=>`<option${x==c?" selected":""}>${x}</option>`).join(""),sel=(id,a,c,rs)=>`<select id="${id}"${rs?' data-rs="1"':""}>${opt(a,c)}</select>`;
+const inp=(id,l,v="")=>`<label>${l}<input id="${id}" value="${v}"></label>`,ta=(id,l,v)=>`<label>${l}<textarea id="${id}" rows="3">${v}</textarea></label>`;
+const CU={"ความยาว":{m:1,km:1e3,cm:.01,mm:.001,"ไมล์":1609.344,"หลา":.9144,"ฟุต":.3048,"นิ้ว":.0254,"ไมล์ทะเล":1852,"วา":2,"เส้น":40},"มวล":{kg:1,g:.001,mg:1e-6,"ตัน":1e3,lb:.45359237,oz:.028349523125,"บาท(ทอง)":.015244},"เวลา":{"วินาที":1,"นาที":60,"ชม.":3600,"วัน":86400,"สัปดาห์":604800,"ปี":31557600},"พื้นที่":{"ตร.ม.":1,"ตร.กม.":1e6,"เฮกตาร์":1e4,"ไร่":1600,"งาน":400,"ตร.วา":4,"เอเคอร์":4046.8564224,"ตร.ฟุต":.09290304},"ปริมาตร":{L:1,mL:.001,"ลบ.ม.":1e3,"แกลลอน(US)":3.785411784,"ถ้วย(US)":.2365882365,"ลบ.ฟุต":28.316846592},"ความเร็ว":{"m/s":1,"km/h":1/3.6,mph:.44704,"นอต":1852/3600},"ความดัน":{Pa:1,kPa:1e3,bar:1e5,atm:101325,psi:6894.757293168,mmHg:133.322387415},"พลังงาน":{J:1,kJ:1e3,cal:4.184,kcal:4184,kWh:3.6e6,eV:1.602176634e-19,BTU:1055.05585},"อุณหภูมิ":{"°C":1,"°F":1,K:1}};
+const CC=[["c","ความเร็วแสง","299792458","m/s"],["g","แรงโน้มถ่วงมาตรฐาน","9.80665","m/s²"],["G","ค่าคงตัวความโน้มถ่วง","6.6743e-11","m³/kg·s²"],["h","ค่าคงตัวของพลังค์","6.62607015e-34","J·s"],["ħ","พลังค์ลดรูป","1.054571817e-34","J·s"],["k","ค่าคงตัวโบลต์ซมันน์","1.380649e-23","J/K"],["Nₐ","เลขอาโวกาโดร","6.02214076e23","1/mol"],["R","ค่าคงตัวแก๊ส","8.314462618","J/mol·K"],["e","ประจุพื้นฐาน","1.602176634e-19","C"],["mₑ","มวลอิเล็กตรอน","9.1093837015e-31","kg"],["mₚ","มวลโปรตอน","1.67262192369e-27","kg"],["mₙ","มวลนิวตรอน","1.67492749804e-27","kg"],["ε₀","permittivity สุญญากาศ","8.8541878128e-12","F/m"],["μ₀","permeability สุญญากาศ","1.25663706212e-6","N/A²"],["σ","สเตฟาน–โบลต์ซมันน์","5.670374419e-8","W/m²K⁴"],["F","ค่าคงตัวฟาราเดย์","96485.33212","C/mol"],["a₀","รัศมีโบร์","5.29177210903e-11","m"],["u","หน่วยมวลอะตอม","1.66053906660e-27","kg"],["atm","ความดันบรรยากาศ","101325","Pa"],["Vₘ","ปริมาตรโมลาร์ (STP)","0.02241396954","m³/mol"]];
+const UI={EQN:eqnUI,STAT:statUI,
+MAT:()=>ta("mA","เมทริกซ์ A (1 แถวต่อบรรทัด)","1 2\n3 4")+ta("mB","เมทริกซ์ B","5 6\n7 8")+sel("mo",["A+B","A−B","A×B","B×A","det A","det B","A⁻¹","B⁻¹","Aᵀ","A²"])+GO,
+VEC:()=>inp("vA","เวกเตอร์ A","1 2 3")+inp("vB","เวกเตอร์ B","4 5 6")+sel("vo",["A+B","A−B","A·B","A×B","|A|","|B|","มุมระหว่าง A,B","หน่วย Â"])+GO,
+DIST:()=>sel("dt",["ปกติ","ทวินาม","ปัวซอง"],S.dt,1)+(S.dt=="ปกติ"?inp("d0","μ","0")+inp("d1","σ","1")+inp("d2","x","1.96")+inp("d3","p (ถ้าต้องการหา x ย้อนกลับ)"):S.dt=="ทวินาม"?inp("d0","n","10")+inp("d1","p","0.5")+inp("d2","k","3"):inp("d0","λ","4")+inp("d1","k","2"))+GO,
+BASE:()=>inp("bA","A","FF")+sel("bb",[16,10,8,2],16)+inp("bB","B (ถ้าใช้)","")+sel("bo",["แปลงฐานเท่านั้น","A AND B","A OR B","A XOR B","A XNOR B","A NAND B","A NOR B","NOT A","−A","A+B","A−B","A×B"])+GO,
+TABLE:()=>inp("tf","f(X)","X^2")+inp("tg","g(X) (ไม่บังคับ)","")+inp("ts","เริ่ม","0")+inp("te","สิ้นสุด","5")+inp("tp","ขั้น","1")+GO,
+CONST:()=>CC.map((c,i)=>`<button data-c="${i}" style="margin-top:5px;text-align:left;padding:0 10px">${c[0]} = ${c[2]} ${c[3]}</button>`).join(""),
+CONV:()=>{const u=Object.keys(CU[S.cc]);return sel("cc",Object.keys(CU),S.cc,1)+inp("cv2","ค่า","1")+sel("cf",u,u[0])+sel("ct",u,u[1])+GO}};
+const TABS=[["EQN","สมการ"],["STAT","สถิติ"],["MAT","MATRIX"],["VEC","VECTOR"],["DIST","DISTR"],["BASE","BASE-N"],["TABLE","TABLE"],["CONST","CONST"],["CONV","CONV"],["BOX","Math Box"],["SHEET","Spreadsheet"]];
+function panel(){P.innerHTML='<div class="bar">'+TABS.map(([k,l])=>`<button data-t="${k}" class="${tab==k?"on":""}" style="flex:1 0 30%">${l}</button>`).join("")+"</div>"+UI[tab]()+'<div id="po"></div>'}
+const RUN={
+MAT:()=>{const A=mat($("mA").value),B=mat($("mB").value),q=m=>{if(m.length!=m[0].length)throw"ต้องเป็นเมทริกซ์จัตุรัส";return m};
+return mfmt({"A+B":()=>madd(A,B,1),"A−B":()=>madd(A,B,-1),"A×B":()=>mmul(A,B),"B×A":()=>mmul(B,A),"det A":()=>[[mdet(q(A))]],"det B":()=>[[mdet(q(B))]],"A⁻¹":()=>minv(q(A)),"B⁻¹":()=>minv(q(B)),"Aᵀ":()=>mT(A),"A²":()=>mmul(A,A)}[$("mo").value]())},
+VEC:()=>{const a=vec($("vA").value),b=vec($("vB").value),dot=(p,q)=>p.reduce((s,x,i)=>s+x*q[i],0),nm=p=>Math.sqrt(dot(p,p)),Sv=x=>"("+x.map(fn).join(", ")+")",k=ang=="DEG"?180/Math.PI:ang=="GRAD"?200/Math.PI:1,two=()=>{if(a.length!=b.length)throw"ขนาดเวกเตอร์ไม่เท่ากัน"};
+return[{"A+B":()=>(two(),Sv(a.map((x,i)=>x+b[i]))),"A−B":()=>(two(),Sv(a.map((x,i)=>x-b[i]))),"A·B":()=>(two(),fn(dot(a,b))),"A×B":()=>{const p=[...a,0].slice(0,3),r=[...b,0].slice(0,3);return Sv([p[1]*r[2]-p[2]*r[1],p[2]*r[0]-p[0]*r[2],p[0]*r[1]-p[1]*r[0]])},"|A|":()=>fn(nm(a)),"|B|":()=>fn(nm(b)),"มุมระหว่าง A,B":()=>(two(),fn(Math.acos(dot(a,b)/nm(a)/nm(b))*k)+" "+ang),"หน่วย Â":()=>Sv(a.map(x=>x/nm(a)))}[$("vo").value]()]},
+DIST:()=>{const v=[0,1,2,3].map(i=>{const e=$("d"+i);return e&&e.value.trim()?compute(e.value):null});
+if(S.dt=="ปกติ"){const z=(v[2]-v[0])/v[1],L=[`f(x) = ${fn(Math.exp(-z*z/2)/(v[1]*Math.sqrt(2*Math.PI)))}`,`P(X≤x) = ${fn(Phi(z))}`,`Q(X>x) = ${fn(Phi(-z))}`,`z = ${fn(z)}`];
+if(v[3]!=null){if(v[3]<=0||v[3]>=1)throw"p ต้องอยู่ระหว่าง 0 และ 1";let lo=-40,hi3=40;for(let i=0;i<200;i++){const m=(lo+hi3)/2;Phi(m)<v[3]?lo=m:hi3=m}L.push(`x ที่ P(X≤x)=${fn(v[3])} → ${fn(v[0]+v[1]*(lo+hi3)/2)}`)}return L}
+const k=S.dt=="ทวินาม"?v[2]:v[1];if(k<0||k%1)throw"k ต้องเป็นจำนวนเต็ม ≥ 0";let pm,cd=0;
+if(S.dt=="ทวินาม"){if(k>v[0]||v[1]<0||v[1]>1)throw"ค่าพารามิเตอร์ไม่ถูกต้อง";pm=i=>bp(v[0],v[1],i)}else{if(v[0]<=0)throw"λ ต้อง > 0";pm=i=>pp(v[0],i)}
+for(let i=0;i<=k;i++)cd+=pm(i);return[`P(X=k) = ${fn(pm(k))}`,`P(X≤k) = ${fn(cd)}`,`P(X>k) = ${fn(Math.max(0,1-cd))}`]},
+BASE:()=>{const b=+$("bb").value,p=t=>{const x=parseInt(t.trim(),b);if(isNaN(x))throw"ตัวเลขไม่ตรงกับฐานที่เลือก";return x|0},a=p($("bA").value),c=$("bB").value.trim()?p($("bB").value):0;
+const r={"แปลงฐานเท่านั้น":a,"A AND B":a&c,"A OR B":a|c,"A XOR B":a^c,"A XNOR B":~(a^c),"A NAND B":~(a&c),"A NOR B":~(a|c),"NOT A":~a,"−A":-a,"A+B":a+c|0,"A−B":a-c|0,"A×B":Math.imul(a,c)}[$("bo").value],u=r>>>0;
+return["HEX  "+u.toString(16).toUpperCase(),"DEC  "+r,"BIN  "+u.toString(2),"OCT  "+u.toString(8)]},
+TABLE:()=>{const f=$("tf").value,g=$("tg").value,a=compute($("ts").value),e=compute($("te").value),st=compute($("tp").value);if(!(st>0)||(e-a)/st>200)throw"ขั้นต้อง > 0 และไม่เกิน 200 แถว";const X0=V.X,L=["X | f(X)"+(g?" | g(X)":"")],y=(n,x)=>{const v=fX(n,"0",x);return isNaN(v)?"ERR":fn(v)};
+for(let x=a;x<=e+1e-9;x+=st)L.push(fn(x)+" | "+y(f,x)+(g?" | "+y(g,x):""));V.X=X0;return L},
+CONV:()=>{const v=compute($("cv2").value),f=$("cf").value,t=$("ct").value;let r;
+if(S.cc=="อุณหภูมิ"){const k=f=="°C"?v+273.15:f=="°F"?(v-32)*5/9+273.15:v;r=t=="°C"?k-273.15:t=="°F"?(k-273.15)*9/5+32:k}else r=v*CU[S.cc][f]/CU[S.cc][t];return[`${fn(v)} ${f} = ${fmt(parseFloat(r.toPrecision(12)))} ${t}`]}};
+function go(){if(tab=="EQN"||tab=="STAT")return go0();let L;try{const r=RUN[tab]();L=Array.isArray(r)?r:[].concat(r)}catch(e){L=[typeof e=="string"?e:"ข้อมูลไม่ถูกต้อง"]}$("po").innerHTML=L.map(l=>"<div style='white-space:pre'>"+esc(String(l))+"</div>").join("")}
+P.onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;panel()}else if(b.dataset.c){const c=CC[b.dataset.c];fresh=false;ins("("+c[2].replace(/e(-?\d+)/,"×10^$1")+")");render();$("bp").click()}else if(b.id=="go")go()};
+P.onchange=e=>{const t=e.target;if(t.id=="et"){eq.t=t.value;panel()}else if(t.dataset.rs){S[t.id]=t.value;panel()}};
+const rh=t=>{const g=t.match(/^(-?\d+)\.(\d{4,})$/);if(g)return g[1]+"."+g[2].replace(/(\d{3})(?=\d)/g,"$1 ");const m=t.match(/^(-?)(\d+)\/(\d+)$/);return m?m[1]+'<span class="fr"><b>'+m[2]+'</b><b>'+m[3]+'</b></span>':esc(t).replace(/×10\^(-?\d+)/,"×10<sup>$1</sup>")};
+S.sh={};const CL="ABCDE",NR=8;
+UI.BOX=()=>sel("xo",["ลูกเต๋า","เหรียญ","สุ่มจำนวนเต็ม"],S.xo,1)+inp("xn","จำนวนครั้ง (สูงสุด 1000)","10")+(S.xo=="เหรียญ"?"":S.xo=="สุ่มจำนวนเต็ม"?inp("xa","ค่าต่ำสุด","1")+inp("xb","ค่าสูงสุด","100"):inp("xa","จำนวนลูกเต๋าต่อครั้ง","2")+inp("xb","จำนวนด้านต่อลูก","6"))+GO;
+S.xo="ลูกเต๋า";
+RUN.BOX=()=>{const o=S.xo,n=Math.min(1000,compute($("xn").value)|0),g=i=>$(i)?compute($(i).value):0,a=g("xa"),b=g("xb"),r=k=>Math.floor(Math.random()*k),c={},out=[];
+if(n<1||(o=="ลูกเต๋า"&&(a<1||b<2))||(o=="สุ่มจำนวนเต็ม"&&b<a))throw"ค่าไม่ถูกต้อง";
+for(let i=0;i<n;i++){let v;if(o=="ลูกเต๋า"){v=0;for(let j=0;j<a;j++)v+=1+r(b)}else if(o=="เหรียญ")v=r(2)?"หัว":"ก้อย";else v=a+r(b-a+1);c[v]=(c[v]||0)+1;if(i<20)out.push(v)}
+return["ผล: "+out.join(", ")+(n>20?" …":""),"— ความถี่ ("+n+" ครั้ง) —",...Object.keys(c).sort((x,y)=>x-y).map(k=>k+" : "+c[k]+"  ("+(100*c[k]/n).toFixed(1)+"%)")]};
+UI.SHEET=()=>'<table><tr><th></th>'+[...CL].map(c=>"<th>"+c+"</th>").join("")+"</tr>"+Array.from({length:NR},(_,r)=>`<tr><th>${r+1}</th>`+[...CL].map(c=>`<td><input data-cell="${c}${r+1}" autocapitalize="characters" value="${(S.sh[c+(r+1)]||"").replace(/"/g,"&quot;")}"></td>`).join("")+"</tr>").join("")+"</table>"+GO;
+const cellV=(id,seen=[])=>{if(seen.includes(id))throw"อ้างอิงวนกลับ";const raw=(S.sh[id]||"").trim();if(!raw)return 0;if(raw[0]!="=")return compute(raw);const sn=[...seen,id];
+const e=raw.slice(1).replace(/(SUM|AVERAGE|MIN|MAX|COUNT)\(([A-E])(\d+):([A-E])(\d+)\)/gi,(_,f,c1,r1,c2,r2)=>{const v=[];for(let c=CL.indexOf(c1.toUpperCase());c<=CL.indexOf(c2.toUpperCase());c++)for(let r=+r1;r<=+r2;r++){const k=CL[c]+r;if((S.sh[k]||"").trim())v.push(cellV(k,sn))}
+const t=v.reduce((p,q)=>p+q,0);return n2s({SUM:t,AVERAGE:v.length?t/v.length:0,MIN:Math.min(...v),MAX:Math.max(...v),COUNT:v.length}[f.toUpperCase()])}).replace(/\b[A-E]\d+\b/g,m=>n2s(cellV(m,sn)));return compute(e)};
+RUN.SHEET=()=>{const L=["    "+[...CL].map(c=>c.padEnd(10)).join("")];for(let r=1;r<=NR;r++)L.push(String(r).padEnd(4)+[...CL].map(c=>{const id=c+r;if(!(S.sh[id]||"").trim())return"".padEnd(10);try{return fn(cellV(id)).padEnd(10)}catch(e){return"ERR".padEnd(10)}}).join(""));return L};
+P.oninput=e=>{if(e.target.dataset.cell)S.sh[e.target.dataset.cell]=e.target.value};
+const tpl=s=>{s=s.replace(/(\d+)⌐‹([^‹›¦]*)¦([^‹›¦]*)›/g,"($1+($2)/($3))");let p;do{p=s;s=s.replace(/‹([^‹›¦]*)¦([^‹›¦]*)›/g,"(($1)÷($2))")}while(p!=s);return s};
+function fnav(dn){if(fresh)return false;let d=0,o=-1;for(let i=pos-1;i>=0;i--){if(expr[i]=="›")d++;else if(expr[i]=="‹"){if(!d){o=i;break}d--}}if(o<0)return false;
+let m=-1;d=0;for(let j=o+1;j<expr.length;j++){if(expr[j]=="‹")d++;else if(expr[j]=="›"){if(!d)break;d--}else if(expr[j]=="¦"&&!d)m=j}if(m<0)return false;
+if(dn&&pos<=m){pos=m+1;return true}if(!dn&&pos>m){pos=m;return true}return false}
+render();
+</script></body></html>
